@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StudyWithKatariya</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #f5f7fa, #c3cfe2);
+      scroll-behavior: smooth;
+    }
+
+    /* Container - Fix width center */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Top Header */
+    .top-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 30px;
+      background: white;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    /* Logo + Text */
+    .logo-container {
+      display: flex;
+      align-items: left-side;
+      gap: 10px;
+    }
+
+    .logo-container img {
+      height: 50px;
+      width: auto;
+    }
+
+    .logo-text {
+      font-size: 28px;
+      font-weight: bold;
+      color: green;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    }
+
+    .logo-text span:nth-child(1) { color: darkgreen; }
+    .logo-text span:nth-child(2) { color: blue; }
+    .logo-text span:nth-child(3) { color: green; }
+
+    /* Search Box */
+    .search-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .search-box input {
+      padding: 8px 12px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      outline: none;
+      width: 220px;
+      transition: 0.3s ease;
+    }
+
+    .search-box input:focus {
+      border-color: green;
+      box-shadow: 0 0 5px rgba(0,128,0,0.5);
+    }
+
+    .search-box button {
+      padding: 8px 16px;
+      background: green;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background 0.3s ease;
+    }
+
+    .search-box button:hover {
+      background: darkgreen;
+    }
+
+    /* Subject Navigation */
+    .subject-nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      background: #1a1a1a;
+      padding: 12px;
+      gap: 25px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    }
+
+    .subject-nav a {
+      text-decoration: none;
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    .subject-nav a::after {
+      content: '';
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background: lightgreen;
+      transition: width 0.3s ease;
+    }
+
+    .subject-nav a:hover {
+      color: lightgreen;
+    }
+
+    .subject-nav a:hover::after {
+      width: 100%;
+    }
+
+    /* Section Styles */
+    section {
+      padding: 40px 20px;
+      background: white;
+      margin: 20px auto;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      max-width: 1000px;
+      color: white;
+    }
+
+    section h2 {
+      margin-bottom: 15px;
+      font-size: 28px;
+      border-bottom: 2px solid white;
+      display: inline-block;
+      padding-bottom: 5px;
+    }
+
+    /* Unique Section Colors */
+    #html {
+      background: linear-gradient(to right, #ff9966, #ff5e62);
+    }
+
+    #css {
+      background: linear-gradient(to right, #36d1dc, #5b86e5);
+    }
+
+    #javascript {
+      background: linear-gradient(to right, #f7971e, #ffd200);
+      color: black;
+    }
+
+    #python {
+      background: linear-gradient(to right, #43cea2, #185a9d);
+    }
+
+    #sql {
+      background: linear-gradient(to right, #654ea3, #eaafc8);
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .logo-text {
+        font-size: 22px;
+      }
+      .search-box input {
+        width: 150px;
+        font-size: 14px;
+      }
+      .search-box button {
+        font-size: 14px;
+      }
+      .subject-nav a {
+        font-size: 16px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .top-header {
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+      }
+      .logo-container {
+        flex-direction: column;
+      }
+      .search-box input {
+        width: 180px;
+      }
+      .logo-text {
+        font-size: 20px;
+      }
+      .subject-nav {
+        gap: 15px;
+      }
+      .subject-nav a {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Top Header -->
+    <div class="top-header">
+      <div class="logo-container">
+        <img src="sk.png" alt="Logo">
+        <div class="logo-text"><span>Study</span><span>With</span><span>Katariya</span></div>
+      </div>
+      <div class="search-box">
+        <input type="text" placeholder="Search...">
+        <button>Search</button>
+      </div>
+    </div>
+
+    <!-- Subject Navigation -->
+    <div class="subject-nav">
+      <a href="#html">HTML</a>
+      <a href="#css">CSS</a>
+      <a href="#javascript">JAVASCRIPT</a>
+      <a href="#python">PYTHON</a>
+      <a href="#sql">SQL</a>
+    </div>
+
+    <!-- ID Sections -->
+    <section id="html">
+      <h2>HTML</h2>
+      <p>HTML ke content yaha likho...</p>
+    </section>
+
+    <section id="css">
+      <h2>CSS</h2>
+      <p>CSS ke content yaha likho...</p>
+    </section>
+
+    <section id="javascript">
+      <h2>JavaScript</h2>
+      <p>JavaScript ke content yaha likho...</p>
+    </section>
+
+    <section id="python">
+      <h2>Python</h2>
+      <p>Python ke content yaha likho...</p>
+    </section>
+
+    <section id="sql">
+      <h2>SQL</h2>
+      <p>SQL ke content yaha likho...</p>
+    </section>
+
+  </div>
+
+</body>
+</html>
