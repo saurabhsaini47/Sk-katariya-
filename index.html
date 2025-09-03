@@ -12,13 +12,11 @@
       scroll-behavior: smooth;
     }
 
-    /* Container - Fix width center */
     .container {
       max-width: 1200px;
       margin: 0 auto;
     }
 
-    /* Top Header */
     .top-header {
       display: flex;
       justify-content: space-between;
@@ -29,12 +27,12 @@
       position: sticky;
       top: 0;
       z-index: 100;
+      flex-wrap: wrap;
     }
 
-    /* Logo + Text */
     .logo-container {
       display: flex;
-      align-items: left-side;
+      align-items: center;
       gap: 10px;
     }
 
@@ -50,11 +48,6 @@
       text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
     }
 
-    .logo-text span:nth-child(1) { color: darkgreen; }
-    .logo-text span:nth-child(2) { color: blue; }
-    .logo-text span:nth-child(3) { color: green; }
-
-    /* Search Box */
     .search-box {
       display: flex;
       align-items: center;
@@ -68,12 +61,6 @@
       border-radius: 5px;
       outline: none;
       width: 220px;
-      transition: 0.3s ease;
-    }
-
-    .search-box input:focus {
-      border-color: green;
-      box-shadow: 0 0 5px rgba(0,128,0,0.5);
     }
 
     .search-box button {
@@ -84,11 +71,6 @@
       border-radius: 5px;
       cursor: pointer;
       font-size: 16px;
-      transition: background 0.3s ease;
-    }
-
-    .search-box button:hover {
-      background: darkgreen;
     }
 
     /* Subject Navigation */
@@ -99,39 +81,25 @@
       background: #1a1a1a;
       padding: 12px;
       gap: 25px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
     }
 
-    .subject-nav a {
-      text-decoration: none;
+    .subject-nav button {
+      background: none;
+      border: none;
       color: white;
       font-size: 18px;
       font-weight: bold;
+      cursor: pointer;
       position: relative;
-      transition: color 0.3s ease;
     }
 
-    .subject-nav a::after {
-      content: '';
-      position: absolute;
-      width: 0%;
-      height: 2px;
-      bottom: -5px;
-      left: 0;
-      background: lightgreen;
-      transition: width 0.3s ease;
-    }
-
-    .subject-nav a:hover {
+    .subject-nav button:hover {
       color: lightgreen;
-    }
-
-    .subject-nav a:hover::after {
-      width: 100%;
     }
 
     /* Section Styles */
     section {
+      display: none;
       padding: 40px 20px;
       background: white;
       margin: 20px auto;
@@ -141,75 +109,45 @@
       color: white;
     }
 
-    section h2 {
-      margin-bottom: 15px;
-      font-size: 28px;
-      border-bottom: 2px solid white;
-      display: inline-block;
-      padding-bottom: 5px;
+    section.active {
+      display: block;
+    }
+
+    /* Page Styles */
+    .page {
+      display: none;
+    }
+    .page.active {
+      display: block;
+    }
+
+    .page-nav {
+      margin-top: 20px;
+      text-align: center;
+    }
+    .page-nav button {
+      margin: 5px;
+      padding: 8px 16px;
+      background: black;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .page-nav button:hover {
+      background: green;
     }
 
     /* Unique Section Colors */
-    #html {
-      background: linear-gradient(to right, #ff9966, #ff5e62);
-    }
+    #html { background: linear-gradient(to right, #ff9966, #ff5e62); }
+    #css { background: linear-gradient(to right, #36d1dc, #5b86e5); }
+    #javascript { background: linear-gradient(to right, #f7971e, #ffd200); color: black; }
+    #python { background: linear-gradient(to right, #43cea2, #185a9d); }
+    #sql { background: linear-gradient(to right, #654ea3, #eaafc8); }
+    #java { background: linear-gradient(to right, #0f2027, #2c5364); }
+    #c { background: linear-gradient(to right, #00c6ff, #0072ff); }
+    #cpp { background: linear-gradient(to right, #8e2de2, #4a00e0); }
 
-    #css {
-      background: linear-gradient(to right, #36d1dc, #5b86e5);
-    }
-
-    #javascript {
-      background: linear-gradient(to right, #f7971e, #ffd200);
-      color: black;
-    }
-
-    #python {
-      background: linear-gradient(to right, #43cea2, #185a9d);
-    }
-
-    #sql {
-      background: linear-gradient(to right, #654ea3, #eaafc8);
-    }
-
-    /* Mobile Responsive */
-    @media (max-width: 768px) {
-      .logo-text {
-        font-size: 22px;
-      }
-      .search-box input {
-        width: 150px;
-        font-size: 14px;
-      }
-      .search-box button {
-        font-size: 14px;
-      }
-      .subject-nav a {
-        font-size: 16px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .top-header {
-        flex-direction: column;
-        gap: 10px;
-        align-items: center;
-      }
-      .logo-container {
-        flex-direction: column;
-      }
-      .search-box input {
-        width: 180px;
-      }
-      .logo-text {
-        font-size: 20px;
-      }
-      .subject-nav {
-        gap: 15px;
-      }
-      .subject-nav a {
-        font-size: 14px;
-      }
-    }
   </style>
 </head>
 <body>
@@ -222,76 +160,94 @@
         <div class="logo-text"><span>Study</span><span>With</span><span>Katariya</span></div>
       </div>
       <div class="search-box">
-        <input type="text" placeholder="Search...">
-        <button>Search</button>
+        <input type="text" id="searchInput" placeholder="Search...">
+        <button onclick="searchSection()">Search</button>
       </div>
     </div>
 
     <!-- Subject Navigation -->
     <div class="subject-nav">
-      <a href="#html">HTML</a>
-      <a href="#css">CSS</a>
-      <a href="#javascript">JAVASCRIPT</a>
-      <a href="#python">PYTHON</a>
-      <a href="#sql">SQL</a>
+      <button onclick="showSection('html')">HTML</button>
+      <button onclick="showSection('css')">CSS</button>
+      <button onclick="showSection('javascript')">JavaScript</button>
+      <button onclick="showSection('python')">Python</button>
+      <button onclick="showSection('sql')">SQL</button>
+      <button onclick="showSection('java')">Java</button>
+      <button onclick="showSection('c')">C</button>
+      <button onclick="showSection('cpp')">C++</button>
     </div>
 
-    <!-- ID Sections -->
-    <section id="html">
-      <h2>HTML</h2>
-      <p>HTML write here something</p>
-    </section>
-
-    <section id="css">
-      <h2>CSS</h2>
-      <p>CSS ke content yaha likho...</p>
-    </section>
-
-    <section id="javascript">
-      <h2>JavaScript</h2>
-      <p>JavaScript ke content yaha likho...</p>
-    </section>
-
+    <!-- Example Sections with Pages -->
     <section id="python">
       <h2>Python</h2>
-      <p>Python is a high levele programing language it was created by gado van rossum in 1991.<br> What is Python
-        
-Summary: In this tutorial, you’ll learn about Python’s programming language and why you should learn it today.>
-
-        <h1>What is Python programming language?</h1>
-Python is a high-level, general-purpose, interpreted programming language.
-        <br><h3>
-1) High-level 
-Python is a high-level programming language that is easy to learn. It doesn’t require you to understand the details of the computer to develop programs efficiently.</br>
-
-          <br>2) General-purpose 
-Python is a general-purpose language. It means that you can use Python in various domains, including:
-
-Web applications
-Big data applications
-Testing
-Automation
-Data science, machine learning, and AI
-Desktop software
-Mobile apps</br>
-          
-3) Interpreted 
-Python is an interpreted language. To develop a Python program, you write Python code into a file called source code.</h3>
-
-To execute the source code, you must convert it to a machine language the computer can understand. The Python interpreter turns the source code, line by line, once at a time, into the machine code when the Python program executes.
-
-Compiled languages like Java and C# use a compiler that compiles the whole source code before the program executes..</p>
+      <div class="page active" id="python-page1">
+        <p>👉 Page 1: Python Introduction</p>
+      </div>
+      <div class="page" id="python-page2">
+        <p>👉 Page 2: Python Variables & Data Types</p>
+      </div>
+      <div class="page-nav">
+        <button onclick="showPage('python','page1')">Page 1</button>
+        <button onclick="showPage('python','page2')">Page 2</button>
+      </div>
     </section>
 
-    <section id="sql">
-      <h2>SQL</h2>
-      <p>SQL ke content yaha likho...</p>
+    <section id="html">
+      <h2>HTML</h2>
+      <div class="page active" id="html-page1">
+        <p>👉 Page 1: HTML Introduction</p>
+      </div>
+      <div class="page" id="html-page2">
+        <p>👉 Page 2: HTML Tags & Attributes</p>
+      </div>
+      <div class="page-nav">
+        <button onclick="showPage('html','page1')">Page 1</button>
+        <button onclick="showPage('html','page2')">Page 2</button>
+      </div>
     </section>
 
   </div>
-<footer>
-    <p>© 2025 StudyWithKatariya. All Rights Reserved.</p>
-</footer>
+
+  <!-- JavaScript -->
+  <script>
+    function showSection(sectionId) {
+      document.querySelectorAll("section").forEach(sec => sec.classList.remove("active"));
+      document.getElementById(sectionId).classList.add("active");
+    }
+
+    function showPage(sectionId, pageId) {
+      const pages = document.querySelectorAll(`#${sectionId} .page`);
+      pages.forEach(p => p.classList.remove("active"));
+      document.getElementById(`${sectionId}-${pageId}`).classList.add("active");
+    }
+
+    function searchSection() {
+      let input = document.getElementById("searchInput").value.toLowerCase().trim();
+
+      // keywords mapping
+      let keywords = {
+        "html": "html",
+        "css": "css",
+        "javascript": "javascript",
+        "js": "javascript",
+        "python": "python",
+        "sql": "sql",
+        "java": "java",
+        "c": "c",
+        "cpp": "cpp",
+        "c++": "cpp"
+      };
+
+      if (keywords[input]) {
+        showSection(keywords[input]);
+      } else {
+        alert("❌ Section not found! Please search: HTML, CSS, JavaScript, Python, SQL, Java, C, C++");
+      }
+    }
+
+    // Default section
+    showSection("html");
+  </script>
 
 </body>
-</html>
+  </html>
